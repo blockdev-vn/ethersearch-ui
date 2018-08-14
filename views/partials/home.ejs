@@ -4,164 +4,30 @@
             <div class="card-header clearfix col-header">
 
                 <span class="float-left">Recent blocks</span>
-                <button type="button" class="btn btn-outline-primary btn-sm float-right">View all</button>
+                <!-- <button type="button" class="btn btn-outline-primary btn-sm float-right">View all</button> -->
 
             </div>
             <div class="card-body scrollbar block-col style-1 padding-0">
-
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-success">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
+                <ul class="list-group" id="list-blocks">
+                    <%blocks.forEach(block => {%>
+                        <li class="list-group-item list-group-item-<%=block.number%2==0?'secondary':'success'%>">
+                            <div class="row">
+                                <div class="col-12">
+                                    block
+                                    <a href="/block?number=<%=block.number%>"><%=block.number%></a>
+                                    <span>(<%=block.timestamp%>)</span>
+                                    <br>
+                                    mined by
+                                    <a href="/addr?a=<%=block.miner%>"><%=block.miner%></a><br>
+                                    <span>txs <%=block.transactions.length%> </span><br>
+                                    <span>uncles <%=block.uncles.length%></span>
+                                    <!-- <span>3.375 eth</span> -->
+                                </div>
+                                
                             </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-info">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-warning">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-danger">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-primary">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-dark">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-light">
-                        <div class="row">
-                            <div class="col-4">
-                                block
-                                <a href="#">19889</a>
-                                <br>
-                                <span>59s ago</span>
-                                <br>
-                                <span>3.375 eth</span>
-                            </div>
-                            <div class="col-8">
-                                mined by
-                                <a href="#">6019369601936960</a>
-                                <br>
-                                <a href="#">167 txs</a>
-                                <br> uncle 0
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    <%})%>                    
+                    
                 </ul>
 
             </div>
@@ -171,13 +37,13 @@
         <div class="card card-success">
             <div class="card-header clearfix col-header">
 
-                <span class="float-left">Recent blocks</span>
-                <button type="button" class="btn btn-outline-primary btn-sm float-right">View all</button>
+                <span class="float-left">Recent transactions</span>
+                <!-- <button type="button" class="btn btn-outline-primary btn-sm float-right">View all</button> -->
 
             </div>
             <div class="card-body scrollbar block-col style-1 padding-0">
 
-                <ul class="list-group">
+                <ul class="list-group" id="list-txs">
                     <li class="list-group-item list-group-item-success">
                         tx
                         <a href="#">0x8827175e28e...357acc889e64</a>

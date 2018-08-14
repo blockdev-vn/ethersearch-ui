@@ -3,11 +3,10 @@
         <div class="card">
 
             <div class="card-header clearfix text-center">
-
-                <button type="button" class="btn btn-outline-primary btn-sm float-left">Prev</button>
-                <span class="text-center">block #189876</span>
-                <button type="button" class="btn btn-outline-primary btn-sm float-right">Next</button>
-
+                <a href="/block?number=<%=number-1%>" class="btn btn-outline-primary btn-sm float-left" role="button">Prev</a>
+                <!-- <button type="button" class="btn btn-outline-primary btn-sm float-left">Prev</button> -->
+                <span class="text-center">block #<%=number%></span>
+                <a href="/block?number=<%=number+1%>" class="btn btn-outline-primary btn-sm float-right" role="button">Next</a>
             </div>
             <div class="card-body padding-0">
                 <div class="table-responsive-sm">
@@ -16,16 +15,16 @@
 
                             <tr>
                                 <td>Hash</td>
-                                <td>0xfd733e1c7ac79620bd146b2cb04dd453f19e53c23be475c039db71e88ffc2f34</td>
+                                <td><%=hash%></td>
                             </tr>
                             <tr>
                                 <td>Difficulty</td>
-                                <td>3,465,686,372,493,094</td>
+                                <td><%=difficulty%></td>
                             </tr>
                             <tr>
                                 <td>Miner</td>
                                 <td>
-                                    <a href="#">0xfd733e1c7ac79620bd146b2cb04dd453f1</a>
+                                    <a href="/addr?a=<%=miner%>"><%=miner%></a>
                                 </td>
                             </tr>
                             <tr>
@@ -39,17 +38,17 @@
                             <tr>
                                 <td>Tx / Uncles</td>
                                 <td>
-                                    <a href="#">154 Transactions</a> and
-                                    <a href="#">1 Uncle</a>
+                                    <a href="#"><%=transactions.length%> Transactions</a> and
+                                    <a href="#"><%=uncles.length%> Uncle</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Gas Limit:</td>
-                                <td>8,007,442</td>
+                                <td><%=gasLimit%></td>
                             </tr>
                             <tr>
                                 <td>Gas Usage:</td>
-                                <td>8,007,442</td>
+                                <td><%=gasUsed%></td>
                             </tr>
                             <tr>
                                 <td>Lowest Gas Price:</td>
@@ -57,25 +56,25 @@
                             </tr>
                             <tr>
                                 <td>Time</td>
-                                <td>07/24/2018 10:07:25 AM (39 minutes ago)</td>
+                                <td><%=timestamp%></td>
                             </tr>
                             <tr>
                                 <td>Size</td>
-                                <td>26,391 bytes</td>
+                                <td><%=size%></td>
                             </tr>
                             <tr>
                                 <td>Extra</td>
-                                <td>七彩神仙鱼 (Raw: 0xe4b883e5bda9e7a59ee4bb99e9b1bc)</td>
+                                <td><%=extraData%></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="card-footer clearfix text-center">
-                <button type="button" class="btn btn-outline-primary btn-sm float-left">Prev</button>
-                <span class="text-center">block #189876</span>
-                <button type="button" class="btn btn-outline-primary btn-sm float-right">Next</button>
-
+                <a href="/block?number=<%=number-1%>" class="btn btn-outline-primary btn-sm float-left" role="button">Prev</a>
+                <!-- <button type="button" class="btn btn-outline-primary btn-sm float-left">Prev</button> -->
+                <span class="text-center">block #<%=number%></span>
+                <a href="/block?number=<%=number+1%>" class="btn btn-outline-primary btn-sm float-right" role="button">Next</a>
             </div>
         </div>
     </div>

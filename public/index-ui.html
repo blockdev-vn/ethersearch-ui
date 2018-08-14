@@ -388,6 +388,18 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
+        <script src="javascripts/socket.io-client-2.1.0/dist/socket.io.js"></script>
+        <script src="javascripts/socket.js"></script>
+        <script>
+            function handleTx(tx) {
+                console.log("New tx", tx);
+            }
+            function handleBlock(tx) {
+                console.log("New block", tx);
+            }
+        var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
+        socket.start()
+        </script>
 </body>
 
 </html>

@@ -22,6 +22,65 @@
     <% include ./partials/home %>
   </div>
   <% include ./partials/footer %>
+  <script src="javascripts/socket.io-client-2.1.0/dist/socket.io.js"></script>
+
+<script src="javascripts/socket.js"></script>
+<script>
+    var listBlocks = $("#list-blocks")
+    var listTxs = $("#list-txs")
+    // listBlocks.empty();
+    listTxs.empty();
+    var txRowFlag = 0;
+    function handleTx(tx) {
+        console.log("New tx", tx);
+        console.log(txRowFlag);
+        var liClass = txRowFlag == 0 ? 'secondary':'success';
+        txRowFlag = txRowFlag^1
+        var li = `<li class="list-group-item list-group-item-success">
+                        tx
+                        <a href="#">${tx.hash}</a>
+                        <br> from
+                        <a href="#">${tx.from}</a> to
+                        <a href="#">${tx.to}</a>
+                        <br>
+                        <span>amount ${tx.value}ETH</span>
+                        <span class="float-right">90s ago</span>
+                    </li>`;
+        if (listTxs.find('li').length > 10) {
+          $("#list-txs li:last").remove()
+        }
+        listTxs.prepend(li)
+    }
+    function handleBlock(block) {
+        // console.log("New block", block);
+        var liClass = block.number%2==0?'secondary':'success'
+        var li = `<li class="list-group-item list-group-item-${liClass}">
+                        <div class="row">
+                            <div class="col-4">
+                                block
+                                <a href="#">${block.number}</a>
+                                <br>
+                                <span>${block.time}ago</span>
+                                <br>
+                                <span>3.375 eth</span>
+                            </div>
+                            <div class="col-8">
+                                mined by
+                                <a href="#">${block.miner}</a>
+                                <br>
+                                <a href="#">${block.txNumber} txs</a>
+                                <br> uncle ${block.uncleNumber}
+                            </div>
+                        </div>
+                    </li>`;
+        if (listBlocks.find('li').length > 10) {
+          $("#list-blocks li:last").remove()
+        }
+        listBlocks.prepend(li)
+    }
+    var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
+    socket.start()
+</script>
 </body>
 
 </html>

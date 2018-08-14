@@ -2,11 +2,9 @@
     <div class="col-xl-12">
         <div class="card">
 
-            <div class="card-header clearfix text-center">
+            <div class="card-header clearfix">
 
-                <button type="button" class="btn btn-outline-primary btn-sm float-left">Prev</button>
-                <span class="text-center">tx index #1989</span>
-                <button type="button" class="btn btn-outline-primary btn-sm float-right">Next</button>
+                <h5>Transaction <%=tx.hash%></h5>
 
             </div>
             <div class="card-body padding-0">
@@ -17,9 +15,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu1">Event logs</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu2">Internal txs</a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- Tab panes -->
@@ -32,48 +30,70 @@
 
                                     <tr>
                                         <td>Hash</td>
-                                        <td>0xfd733e1c7ac79620bd146b2cb04dd453f19e53c23be475c039db71e88ffc2f34</td>
+                                        <td><%=tx.hash%></td>
                                     </tr>
                                     <tr>
                                         <td>Block</td>
                                         <td>
-                                            <a href="#">198000</a>
+                                            <a href="/block?number=<%=tx.blockNumber%>"><%=tx.blockNumber%></a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Time</td>
                                         <td>
-                                            07/24/2018 10:07:25 AM (39 minutes ago)
+                                            ?
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>From</td>
-                                        <td>3.30376 ETH</td>
+                                        <td><a href="/addr?a=<%=tx.from%>"><%=tx.from%></a></td>
                                     </tr>
                                     <tr>
                                         <td>To</td>
-                                        <td>0.30376 ETH</td>
+                                        <td><a href="/addr?a=<%=tx.to%>"><%=tx.to%></a></td>
                                     </tr>
 
                                     <tr>
                                         <td>Gas Price:</td>
-                                        <td>8,007,442</td>
+                                        <td><%=tx.gasPrice%></td>
                                     </tr>
                                     <tr>
                                         <td>Gas Limit:</td>
-                                        <td>8,007,442</td>
+                                        <td><%=tx.gas%></td>
                                     </tr>
                                     <tr>
                                         <td>Gas Used:</td>
-                                        <td>8,007,442</td>
+                                        <td>                                            
+                                            <%=tx.gasUsed%>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Nonce</td>
-                                        <td>123</td>
+                                        <td><%=tx.nonce%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td><%=tx.value%></td>
                                     </tr>
                                     <tr>
                                         <td>Input</td>
-                                        <td>0x989as8d9asd</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="3" id="comment"><%=tx.input%></textarea>
+                                            </div> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>r</td>
+                                        <td><%=tx.r%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>s</td>
+                                        <td><%=tx.s%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>v</td>
+                                        <td><%=tx.v%></td>
                                     </tr>
 
                                 </tbody>
@@ -84,67 +104,41 @@
                         <div class="table-responsive-sm">
                             <table class="table table-bordered">
                                 <tbody>
-                                    <tr>
-                                        <td>[0]</td>
-                                        <td>Address </td>
-                                        <td>
-                                            <a href="#">0x6c6ee5e31d828de241282b9606c8e98ea48526e2</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Name </td>
-                                        <td>
-                                            Transfer (index_topic_1 address from, index_topic_2 address to, uint256 value)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Topic </td>
-                                        <td>
-                                            [0] 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
-                                            <br>[1] 0x000000000000000000000000274f3c32c90517975e29dfc209a23f315c1e5fc7
-                                            <br>[2] 0x00000000000000000000000075bf3fc077008ed6e5e2321593af7adfa8a9ac96
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>data </td>
-                                        <td>
-                                            000000000000000000000000000000000000000000003d0b03326753dcfe0000
-                                        </td>
-                                    </tr>
+                                    <%if(tx.logs) tx.logs.forEach((log, idx)=>{%>
+                                        <tr>
+                                            <td>[<%=idx%>]</td>
+                                            <td>Address </td>
+                                            <td>
+                                                <a href="/addr?a=<%=log.address%>"><%=log.address%></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Name </td>
+                                            <td>
+                                                ?
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Topic </td>
+                                            <td>
+                                                <%log.topics.forEach((t, i)=>{%>
+                                                    [<%=i%>] <%=t%><br>
+                                                <%})%>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>data </td>
+                                            <td>
+                                                <%=log.data%>
+                                            </td>
+                                        </tr>
+                                    <%})%>
+                                    
 
-                                    <tr>
-                                        <td>[1]</td>
-                                        <td>Address </td>
-                                        <td>
-                                            <a href="#">0x6c6ee5e31d828de241282b9606c8e98ea48526e2</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Name </td>
-                                        <td>
-                                            Transfer (index_topic_1 address from, index_topic_2 address to, uint256 value)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Topic </td>
-                                        <td>
-                                            [0] 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
-                                            <br>[1] 0x000000000000000000000000274f3c32c90517975e29dfc209a23f315c1e5fc7
-                                            <br>[2] 0x00000000000000000000000075bf3fc077008ed6e5e2321593af7adfa8a9ac96
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>data </td>
-                                        <td>
-                                            000000000000000000000000000000000000000000003d0b03326753dcfe0000
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -183,14 +177,6 @@
                     </div>
                 </div>
             </div>
-
-
-        </div>
-        <div class="card-footer clearfix text-center">
-            <button type="button" class="btn btn-outline-primary btn-sm float-left">Prev</button>
-            <span class="text-center">block #189876</span>
-            <button type="button" class="btn btn-outline-primary btn-sm float-right">Next</button>
-
         </div>
     </div>
 </div>

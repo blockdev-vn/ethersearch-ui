@@ -1,31 +1,26 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header clearfix text-center">
-                Address <%= info.addr %>
+            <div class="card-header clearfix">
+                Address <b><%= address %></b>
             </div>
 
             <div class="card-body padding-0">
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="tab-content">
-                            <div id="home" class="container tab-pane active padding-0">
-                                <h3>Overview</h3>
+                            <div id="" class="container tab-pane active padding-0">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
                                                 <td>balance</td>
-                                                <td><%= info.balance %></td>
+                                                <td><%= balance %></td>
                                             </tr>
                                             <tr>
-                                                <td>value</td>
-                                                <td><%= info.value %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>txs</td>
-                                                <td><%= info.txs %></td>
-                                            </tr>
+                                                <td>nonce</td>
+                                                <td><%= nonce %></td>
+                                            </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -33,22 +28,17 @@
                         </div>
                     </div>
                     <div class="col-xl-6">
-                        <div id="home" class="container tab-pane active padding-0">
-                            <h3>Overview</h3>
+                        <div id="" class="container tab-pane active padding-0">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td>balance</td>
+                                            <td>Created at</td>
                                             <td>0x3c23be475c039db71e88ffc2f34</td>
                                         </tr>
                                         <tr>
-                                            <td>value</td>
-                                            <td>0x3c23be475c039db71e88ffc2f34</td>
-                                        </tr>
-                                        <tr>
-                                            <td>txs</td>
-                                            <td>0x3c23be475c039db71e88ffc2f34</td>
+                                            <td>Code len</td>
+                                            <td><%=code.length%></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -65,9 +55,6 @@
                                 <a class="nav-link active" data-toggle="tab" href="#home">Txs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#menu1">Internal txs</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#menu2">Token transfer</a>
                             </li>
                         </ul>
@@ -80,106 +67,95 @@
                                         <thead>
                                             <th>hash</th>
                                             <th>block</th>
+                                            <th>time</th>
                                             <th>from</th>
+                                            <th>type</th>
                                             <th>to</th>
                                             <th>amount</th>
                                             <th>fee</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="#">0x6c6ee5e31...e98ea48526e2</a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">89998</a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">0x6c6ee5e31...a48526e2</a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">0x6c6ee5e31d...48526e2</a>
-                                                </td>
-                                                <td>
-                                                    19899
-                                                </td>
-                                                <td>
-                                                    19899
-                                                </td>
-                                            </tr>
+                                            <%txs.forEach((tx)=>{%>
+                                                <tr>
+                                                    <td>
+                                                        <a href="/tx?hash=<%=tx.hash%>"><%=Common.shortTextEndingWithDot(tx.hash, 20)%></a>
+                                                    </td>
+                                                    <%if (!tx.blockNumber) {%>
+                                                        <td><span class="badge badge-warning">pending</span></td>
+                                                        <td><span class="badge badge-warning">pending</span></td>
+                                                    <%} else {%>
+                                                        <td> 
+                                                            <a href="/block?number=<%=tx.blockNumber%>"><%=tx.blockNumber%></a>
+                                                        </td>
+                                                        <td>
+                                                            <%=tx.blockTime%>
+                                                        </td>
+                                                    <%}%>
+                                                    <td>
+                                                        <a href="/addr?a=<%=tx.from%>"><%=Common.shortTextEndingWithDot(tx.from,20)%></a>
+                                                    </td>
+                                                    <td>
+                                                        <%if (tx.type == 0 ) {%>
+                                                            <span class="badge badge-warning">out</span>
+                                                        <%} else {%>
+                                                            <span class="badge badge-success">in</span>
 
+                                                        <%}%>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/addr?a=<%=tx.to%>"><%=Common.shortTextEndingWithDot(tx.to,20)%></a>
+                                                    </td>
+                                                    <td>
+                                                        <%=tx.value%>
+                                                    </td>
+                                                    <td>
+                                                        <%=tx.gasUsed*tx.gasPrice%>
+                                                    </td>
+                                                </tr>
+                                            <%})%>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div id="menu1" class="container tab-pane fade padding-0 margin-0">
-                                <div class="table-responsive-sm">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <th>hash</th>
-                                            <th>block</th>
-                                            <th>from</th>
-                                            <th>to</th>
-                                            <th>amount</th>
-                                            <th>fee</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="#">0x6c6ee5e31...e98ea48526e2</a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">89998</a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">0x6c6ee5e31...a48526e2</a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">0x6c6ee5e31d...48526e2</a>
-                                                </td>
-                                                <td>
-                                                    19899
-                                                </td>
-                                                <td>
-                                                    19899
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            
                             <div id="menu2" class="container tab-pane fade padding-0 margin-0">
+                                <div class="">
+                                    <form class="form-inline">
+                                        <input type="text" class="form-control mb-2 mr-sm-2 col-lg-6 col-md-6 col-xm-12 col-sm-9" id="txt-erc20-address" placeholder="Token contract address" value="0x2d051595aa51a29c6eda4eacafbe79234508ca7c">
+                                        <input type="hidden" id="txt-address" value="<%=address%>">
+                                        <button type="button" class="btn btn-primary mb-2" id="btn-erc20-search">Search</button>
+                                    </form>
+                                    <div class="alert alert-warning" id="search-alert">
+                                        <strong>Success!</strong> Indicates a successful or positive action.
+                                    </div>
+                                </div>
                                 <div class="table-responsive-sm">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <th>hash</th>
-                                            <th>block</th>
+                                            <th>tx hash</th>
+                                            <th>time</th>
                                             <th>from</th>
                                             <th>to</th>
                                             <th>amount</th>
-                                            <th>fee</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
+                                        <tbody id="erc20-history">
+                                           <tr>
                                                 <td>
-                                                    <a href="#">0x6c6ee5e31...e98ea48526e2</a>
+                                                    <a href="#">0xcaebd83e99420ae820...</a>
                                                 </td>
                                                 <td>
-                                                    <a href="#">89998</a>
+                                                    <a href="#">1533445312</a>
                                                 </td>
                                                 <td>
-                                                    <a href="#">0x6c6ee5e31...a48526e2</a>
+                                                    <a href="#">0x2f0036792df25362a2de0bab82b4798657b4bc36</a>
                                                 </td>
                                                 <td>
-                                                    <a href="#">0x6c6ee5e31d...48526e2</a>
+                                                    <a href="#">0xc4c7fc58b37be1b4f2a6230cace76afd47cff748</a>
                                                 </td>
                                                 <td>
-                                                    19899
+                                                    9
                                                 </td>
-                                                <td>
-                                                    19899
-                                                </td>
-                                            </tr>
+                                              </tr>
 
                                         </tbody>
                                     </table>

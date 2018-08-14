@@ -1,9 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var EthJsUtil = require('ethereumjs-util');
+var Common = require('../libs/common');
 
-/* GET tx page. */
-router.get('/', function(req, res, next) {
-  res.render('addr', { title: 'tx', info:{addr:'0x0dress', balance: '100.990', value:770, txs:100} });
+router.get('/', function (req, res) {
+  var addr = req.query.a;
+  if (!EthJsUtil.isValidAddress(addr)) {
+    res.redirect('./error');
+  }
+  req.app.blockchainApi.getAddressSummary(addr, (err, rs) => {
+    console.log('GEt err');
+    console.log(err);
+    console.log(rs.data);
+    if (err || !rs || rs.e) {
+      res.redirect('./error');
+    }
+
+    var attachData = {
+      title: 'address',
+      address: addr
+    }
+    attachData = Object.assign(attachData, rs.data)
+    attachData['Common'] = Common;
+    res.render('addr', attachData);
+  })
 });
 
 module.exports = router;
