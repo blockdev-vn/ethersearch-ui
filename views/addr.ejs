@@ -67,7 +67,12 @@
                           <a href="/tx?hash=${tx.hash}">${Common.shortTextEndingWithDot(tx.hash, 20)}</a>
                       </td>
                       <td>
-                          <a href="#">${tx.blockTime}</a>
+
+                        <a href="#" data-toggle="tooltip" title="${moment.unix(tx.blockTime).format('MMMM Do YYYY, h:mm:ss a')}">
+                          ${moment.unix(tx.blockTime).fromNow()}
+                        </a>
+
+                          
                       </td>
                       <td>
                           <a href="/addr?a=${tx.from}">${Common.shortTextEndingWithDot(tx.from,20)}</a>

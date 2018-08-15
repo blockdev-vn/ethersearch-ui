@@ -12,9 +12,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#home">Overview</a>
                     </li>
+                    <%if(tx.logs && tx.logs.length > 0){%>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu1">Event logs</a>
                     </li>
+                    <%}%>
                     <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu2">Internal txs</a>
                     </li> -->
@@ -35,13 +37,22 @@
                                     <tr>
                                         <td>Block</td>
                                         <td>
-                                            <a href="/block?number=<%=tx.blockNumber%>"><%=tx.blockNumber%></a>
+                                            <%if(tx.blockNumber != undefined){%>
+                                                <a href="/block?number=<%=tx.blockNumber%>"><%=tx.blockNumber%></a>
+                                            <%} else {%>
+                                                <span class="badge badge-warning">pending</span>
+                                            <%}%>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Time</td>
                                         <td>
-                                            ?
+                                            
+                                            <%if(tx.blockNumber != undefined){%>
+                                                <div class="time-moment"><%=tx.blockTime%></div>
+                                            <%} else {%>
+                                                <span class="badge badge-warning">pending</span>
+                                            <%}%>
                                         </td>
                                     </tr>
                                     <tr>
@@ -64,7 +75,11 @@
                                     <tr>
                                         <td>Gas Used:</td>
                                         <td>                                            
-                                            <%=tx.gasUsed%>
+                                                <%if(tx.blockNumber != undefined){%>
+                                                    <span><%=tx.gasUsed%></span>
+                                                <%} else {%>
+                                                    <span class="badge badge-warning">pending</span>
+                                                <%}%>
                                         </td>
                                     </tr>
                                     <tr>

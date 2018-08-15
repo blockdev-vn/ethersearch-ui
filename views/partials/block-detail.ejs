@@ -27,18 +27,18 @@
                                     <a href="/addr?a=<%=miner%>"><%=miner%></a>
                                 </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>Reward</td>
                                 <td>3.30376 ETH</td>
                             </tr>
                             <tr>
                                 <td>Tx Fees</td>
                                 <td>0.30376 ETH</td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td>Tx / Uncles</td>
                                 <td>
-                                    <a href="#"><%=transactions.length%> Transactions</a> and
+                                    <a href="#txs"><%=transactions.length%> Transactions</a> and
                                     <a href="#"><%=uncles.length%> Uncle</a>
                                 </td>
                             </tr>
@@ -50,24 +50,55 @@
                                 <td>Gas Usage:</td>
                                 <td><%=gasUsed%></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>Lowest Gas Price:</td>
                                 <td>8,007,442</td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td>Time</td>
-                                <td><%=timestamp%></td>
+                                <td class="time-moment"><%=timestamp%></td>
                             </tr>
                             <tr>
                                 <td>Size</td>
                                 <td><%=size%></td>
                             </tr>
                             <tr>
+                                <td>State root</td>
+                                <td><%=stateRoot%></td>
+                            </tr>
+                            <tr>
+                                <td>Receipt root</td>
+                                <td><%=receiptsRoot%></td>
+                            </tr>
+                            <tr>
+                                <td>Transaction root</td>
+                                <td><%=transactionsRoot%></td>
+                            </tr>
+                            <tr>
                                 <td>Extra</td>
-                                <td><%=extraData%></td>
+                                
+                                <td>
+                                    <%if(extraData.length>100){%>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="3" id="comment"><%=extraData%></textarea>
+                                        </div> 
+                                    <%} else{%>
+                                        <%=extraData%>
+                                    <%}%>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="col-xl-12">
+                    <%if(transactions.length > 0){%>
+                    <h4 name="txs" id="txs">Transactions</h4>
+                    <%}%>
+                    <ul class="list-group list-group-flush">
+                        <%transactions.forEach((tx, i)=>{%>
+                        <li class="list-group-item">[<%=i%>] <a href="/tx?hash=<%=tx%>"><%=tx%></a></li>
+                        <%})%>
+                    </ul>
                 </div>
             </div>
             <div class="card-footer clearfix text-center">
