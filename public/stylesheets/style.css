@@ -47,3 +47,14 @@
 .col-header span {
     font-weight: bold;
 }
+
+.table td, .table th {
+	padding: 0.25rem !important;
+}
+.fa {
+	padding-right: 5px;
+}
+.social-icon {
+	color: white;
+	font-size: 20px !important;
+}
