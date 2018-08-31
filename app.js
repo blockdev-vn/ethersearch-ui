@@ -59,7 +59,6 @@ app.Ready = function (cb) {
         console.log(err);
         app.blocks = blocks;
         blockchainApi.getPendingTx(10, (err, txs)=>{
-            console.log('txsssssssss', txs);
             app.txs = txs;
             cb()
         })
