@@ -56,8 +56,13 @@ app.use('/api', apiRouter);
 
 app.Ready = function (cb) {
     blockchainApi.get10LatestBlock((err, blocks) =>{
+        console.log(err);
         app.blocks = blocks;
-        cb()
+        blockchainApi.getPendingTx(10, (err, txs)=>{
+            console.log('txsssssssss', txs);
+            app.txs = txs;
+            cb()
+        })
     })
 }
 

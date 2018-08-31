@@ -8,6 +8,7 @@ class BlockchainApi {
         this.blockUrl = this.rootUrl + '/block?number='
         this.txUrl = this.rootUrl + '/tx?hash='
         this.latestNumberUrl = this.rootUrl + '/latestnumber'
+        this.txPending = this.rootUrl + '/tx/pool?limit='
     }
 
     getBlockByNumer(number, cb) {
@@ -53,8 +54,19 @@ class BlockchainApi {
         console.log(addr, contractAddr);
         request.get({ url: url, json: true }, (error, response, body) => {
             var statusCode = response && response.statusCode;
-            if (statusCode == 200) {
+            if (statusCode == 200) {               
                 cb(null, body);
+            } else {
+                cb(error || statusCode, null)
+            }
+        });
+    }
+    getPendingTx(limit, cb) {
+        var url = this.txPending + limit;
+        request.get({ url: url, json: true }, (error, response, body) => {
+            var statusCode = response && response.statusCode;
+            if (statusCode == 200) {
+                cb(null, body.data);
             } else {
                 cb(error || statusCode, null)
             }

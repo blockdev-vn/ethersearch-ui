@@ -42,7 +42,7 @@
             <div class="col-md-3 mb-md-0 mb-3">
 
                 <!-- Links -->
-                <h5 class="text-uppercase">Links</h5>
+                <h5 class="text-uppercase">Info</h5>
 
                 <ul class="list-unstyled">
                     <li>
@@ -93,6 +93,7 @@
     crossorigin="anonymous"></script>
 <script src="./javascripts/common.js"></script>
 <script src="./javascripts/moment.2.22.2.js"></script>
+<script src="./javascripts/bignumber.min.7.2.1.js"></script>
 
 <script>
     $(document).ready(()=>{
@@ -101,6 +102,16 @@
             // console.log($(item).text());
             var timeHtml = `<a href="#" data-toggle="tooltip" title="${time.format('MMMM Do YYYY, h:mm:ss a')}">${time.fromNow()}</a>`;
             $(item).html(timeHtml)
+        })
+        $('.bignumber').each((idx, item)=>{
+            var num = new BigNumber($(item).text())
+            console.log(num.toString(10));
+            if($(item).data('unit') == 'eth') {
+                num = num.div(10e18)
+            }
+            var t = num.toString(10);
+            // var timeHtml = `<a href="#" data-toggle="tooltip" title="${time.format('MMMM Do YYYY, h:mm:ss a')}">${time.fromNow()}</a>`;
+            $(item).text(t)
         })
     })
 </script>

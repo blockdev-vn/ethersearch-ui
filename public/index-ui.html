@@ -397,7 +397,8 @@
             function handleBlock(tx) {
                 console.log("New block", tx);
             }
-        var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
+        // var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
+        var socket = new Socket('http://<%=SERVER_IP%>', handleBlock, handleTx)
         socket.start()
         </script>
 </body>

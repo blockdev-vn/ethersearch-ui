@@ -22,6 +22,7 @@ router.get('/', function (req, res) {
     }
     attachData = Object.assign(attachData, rs.data)
     attachData['Common'] = Common;
+    attachData['EthJsUtil'] = EthJsUtil;
     res.render('addr', attachData);
   })
 });
