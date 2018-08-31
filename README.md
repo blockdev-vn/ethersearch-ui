@@ -1,3 +1,15 @@
 # ethersearch-ui
-ethereum explorer ui
-t1
+This is a web app for ethereum blockexplorer
+
+# Install
+```
+npm install
+```
+# Start
+```
+npm start
+```
+
+```
+SERVER_IP=localhost:3001 node bin/www
+```
