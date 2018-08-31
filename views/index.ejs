@@ -22,8 +22,8 @@
     // listTxs.empty();
     var txRowFlag = 0;
     function handleTx(tx) {
-        console.log("New tx", tx);
-        console.log(txRowFlag);
+        // console.log("New tx", tx);
+        // console.log(txRowFlag);
         var liClass = txRowFlag == 0 ? 'secondary':'success';
         txRowFlag = txRowFlag^1
         var li = `<li class="list-group-item list-group-item-${liClass}">

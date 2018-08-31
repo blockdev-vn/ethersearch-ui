@@ -40,7 +40,7 @@ class BlockchainApi {
 
         request.get(url, (error, response, body) => {
             var statusCode = response && response.statusCode;
-            console.log(body);
+            // console.log(body);
             if (statusCode == 200) {
                 var result = JSON.parse(body)
                 cb(null, result);
@@ -51,7 +51,7 @@ class BlockchainApi {
     }
     getERC20History(addr, contractAddr, cb) {
         var url = `${this.addressERC20}?a=${addr}&c=${contractAddr}`;
-        console.log(addr, contractAddr);
+        console.log('getERC20History ', addr, contractAddr);
         request.get({ url: url, json: true }, (error, response, body) => {
             var statusCode = response && response.statusCode;
             if (statusCode == 200) {               
@@ -86,7 +86,7 @@ class BlockchainApi {
                     () => { return number > limit },
                     (next) => {
                         self.getBlockByNumer(number, (err, block) => {
-                            console.log(block);
+                            // console.log(block);
                             if (block) {
                                 rs.push(block.data)
                             }

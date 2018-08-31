@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
   req.app.blockchainApi.getTx(hash, (err, rs) => {
     console.log('GEt err');
     console.log(err);
-    console.log(rs);
+    // console.log(rs);
     if (err || !rs || rs.e) {
       return res.redirect('./error');
     }

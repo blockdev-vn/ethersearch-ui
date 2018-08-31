@@ -33,12 +33,12 @@
           
       })
       .done(function(rs) {
-            console.log(rs)
+            // console.log(rs)
             alertRs.hide()
             displayErc20History(rs.data)
       })
       .fail(function(){
-            console.log("fail");
+            // console.log("fail");
             showResultInfo("There are errors. Please check input format.")
             
       });
@@ -46,7 +46,7 @@
 
     function displayErc20History(data) {
       var tbody = $('#erc20-history');
-      console.log(data);
+      // console.log(data);
       tbody.empty()
       if (!data.length) {
         showResultInfo("There are no records.")
