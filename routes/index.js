@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     
     req.app.blockchainApi.getPendingTx(10, (err, txs) => {
       var attachData = {
-        title: "Home",
+        title: "Ether search",
         blocks: blocks || [],
         txs: txs || [],
         SERVER_IP: serverIP
