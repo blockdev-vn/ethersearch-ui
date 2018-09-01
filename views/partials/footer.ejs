@@ -107,7 +107,7 @@
             var num = new BigNumber($(item).text())
             // console.log(num.toString(10));
             if($(item).data('unit') == 'eth') {
-                num = num.div(10e18)
+                num = num.div(1e18)
             }
             var t = num.toString(10);
             // var timeHtml = `<a href="#" data-toggle="tooltip" title="${time.format('MMMM Do YYYY, h:mm:ss a')}">${time.fromNow()}</a>`;
