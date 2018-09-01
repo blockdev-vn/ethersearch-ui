@@ -43,11 +43,11 @@
                     <%txs.forEach((tx, i) => {%>
                     <li class="list-group-item list-group-item-<%if(i%2==0) {%>secondary<%}else{%>success<%}%>">
                         hash
-                        <a href="#"><%=Common.shortTextEndingWithDot(tx.hash, 40)%></a><br> 
-                        from <a href="#"><%=Common.shortTextEndingWithDot(tx.from, 20)%></a>
-                        to <a href="#"><%=Common.shortTextEndingWithDot(tx.to, 20)%></a>
+                        <a href="/tx?hash=<%=tx.hash%>"><%=Common.shortTextEndingWithDot(tx.hash, 40)%></a><br> 
+                        from <a href="/addr?a=<%=tx.from%>"><%=Common.shortTextEndingWithDot(tx.from, 20)%></a>
+                        to <a href="/addr?a=<%=tx.to%>"><%=Common.shortTextEndingWithDot(tx.to, 20)%></a>
                         <br>
-                        value <span><%=tx.value%></span>
+                        value <span class="bignumber" data-unit="eth"><%=tx.value%></span> ETH
                         <!-- <span class="float-right">90s ago</span> -->
                     </li>
                     <%})%>
