@@ -47,7 +47,7 @@
             <div class="col-12">
                 block
                 <a href="/block?number=${block.number}">${block.number}</a>
-                (<a href="#" class="time-moment" data-toggle="tooltip" title="${moment.unix(block.time).format('MMMM Do YYYY, h:mm:ss a')}">${moment.unix(block.time).fromNow()}</a>)
+                (<a href="#" class="time-moment" data-toggle="tooltip" data-time="${block.time}" title="${moment.unix(block.time).format('MMMM Do YYYY, h:mm:ss a')}">${moment.unix(block.time).fromNow()}</a>)
                 <br>
                 mined by
                 <a href="/addr?a=${block.miner}">${block.miner}</a><br>
@@ -64,6 +64,18 @@
     var socket = new Socket('http://<%=SERVER_IP%>', handleBlock, handleTx)
     // var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
     socket.start()
+
+    // Update time of block every second
+
+    function updateBlockTime() {
+        $('.time-moment').each(function(idx,el){
+            var timeEl = $(el);
+            console.log(timeEl.text());
+            var time = timeEl.data('time');
+            var fromNow = moment.unix(time).fromNow()
+            timeEl.text(fromNow);
+        })
+    }
 </script>
 </body>
 
