@@ -65,12 +65,14 @@
     // var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
     socket.start()
 
-    // Update time of block every second
+    // Update time of block every 5seconds
+    setInterval(function(){
+        updateBlockTime()
+    }, 5000);
 
     function updateBlockTime() {
         $('.time-moment').each(function(idx,el){
             var timeEl = $(el);
-            console.log(timeEl.text());
             var time = timeEl.data('time');
             var fromNow = moment.unix(time).fromNow()
             timeEl.text(fromNow);

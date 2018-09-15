@@ -22,7 +22,7 @@ Socket.prototype.start = function () {
 
     })
     socket.on('BlockNew', (msg) => {
-        console.log('BlockNew ', msg.number);
+        // console.log('BlockNew ', msg.number);
         self.handleBlock(msg);
     })
     socket.on('TxNew', (msg) => {
