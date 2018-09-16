@@ -58,3 +58,6 @@
 	color: white;
 	font-size: 20px !important;
 }
+.navbar-brand img{
+	width: 48px;
+}
