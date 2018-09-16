@@ -9,15 +9,13 @@ router.get('/', function (req, res) {
     res.redirect('./error');
   }
   req.app.blockchainApi.getAddressSummary(addr, (err, rs) => {
-    console.log('GEt err');
-    console.log(err);
-    console.log(rs.data);
+
     if (err || !rs || rs.e) {
       res.redirect('./error');
     }
 
     var attachData = {
-      title: 'address',
+      title: 'address ' + addr,
       address: addr
     }
     attachData = Object.assign(attachData, rs.data)
