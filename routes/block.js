@@ -8,9 +8,6 @@ router.get('/', function (req, res, next) {
     return res.redirect('./error');
   }
   req.app.blockchainApi.getBlockByNumer(number, (err, rs) => {
-    console.log('GEt err');
-    console.log(err);
-    console.log(rs.data);
     if (err || !rs || rs.e) {
       return res.redirect('./error');
     }

@@ -49,15 +49,18 @@ class Socket {
             io.on('join', (msg) => {
                 console.log('join to ', msg);
             })
-        
         })
         io.on('BlockNew', (msg) => {
             console.log('BlockNew ', msg.number);
             self.server.to(CONST.BlockNew).emit(CONST.BlockNew, msg);
+            if (this.app && this.app.blocks) {
+                this.app.blocks.slice(1);
+                this.app.blocks.push(msg);
+            }
         })
         io.on('TxNew', (msg) => {
             var tx = new Tx(msg)
-            msg.from = '0x' + tx.getSenderAddress().toString('hex')
+            msg.from = '0x' + tx.getSenderAddress().toString('hex');
             console.log('TxNew ', msg);
             self.server.to(CONST.TxNew).emit(CONST.TxNew, msg);
 

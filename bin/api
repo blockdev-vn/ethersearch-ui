@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var Api = require('ethersearch-api');
+var rpcUrl = process.env.RCP_URL // || 'http://localhost:8547';
+var wsUrl = process.env.WS_URL // || 'ws://localhost:8548';
+var port = process.env.PORT // || 3000;
+
+var app = new Api(rpcUrl, wsUrl, port);
+app.start()

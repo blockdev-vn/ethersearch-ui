@@ -61,7 +61,7 @@
         }
         listBlocks.prepend(li)
     }
-    var socket = new Socket('http://<%=SERVER_IP%>', handleBlock, handleTx)
+    var socket = new Socket('<%=SERVER_IP%>', handleBlock, handleTx)
     // var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
     socket.start()
 
