@@ -1,6 +1,6 @@
 # Architect
 
-![architect](https://github.com/blockdev-vn/ethersearch-ui/blob/master/docs/img/ethersearch-diagram.png|alt=architect)
+![architect](https://github.com/blockdev-vn/ethersearch-ui/blob/master/docs/img/ethersearch-diagram.png)
 
 * [ethersearch-ui](https://github.com/blockdev-vn/ethersearch-ui)
 * [ethersearch-api](https://github.com/blockdev-vn/ethersearch-api)
