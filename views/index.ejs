@@ -26,7 +26,7 @@
         // console.log(txRowFlag);
         var liClass = txRowFlag == 0 ? 'secondary':'success';
         txRowFlag = txRowFlag^1;
-        var txValue = new BigNumber(tx.value).div(1e18).toString(10)
+        var txValue = new BigNumber(tx.value).div(1e18).toString(10);
         var li = `<li class="list-group-item list-group-item-${liClass}">
                         hash 
                         <a href="/tx?hash=${tx.hash}">${Common.shortTextEndingWithDot(tx.hash, 40)}</a> <br>
@@ -47,7 +47,7 @@
             <div class="col-12">
                 block
                 <a href="/block?number=${block.number}">${block.number}</a>
-                (<a href="#" class="time-moment" data-toggle="tooltip" data-time="${block.time}" title="${moment.unix(block.time).format('MMMM Do YYYY, h:mm:ss a')}">${moment.unix(block.time).fromNow()}</a>)
+                (<a href="#" class="time-moment" data-toggle="tooltip" data-time="${block.timestamp}" title="${moment.unix(block.timestamp).format('MMMM Do YYYY, h:mm:ss a')}">${moment.unix(block.timestamp).fromNow()}</a>)
                 <br>
                 mined by
                 <a href="/addr?a=${block.miner}">${block.miner}</a><br>
@@ -61,7 +61,9 @@
         }
         listBlocks.prepend(li)
     }
-    var socket = new Socket('<%=SERVER_IP%>', handleBlock, handleTx)
+    var socket = new Socket('<%=SERVER_IP%>', handleBlock, handleTx, (msg)=>{
+        console.log(msg);
+    })
     // var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
     socket.start()
 

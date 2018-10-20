@@ -16,8 +16,9 @@ var apiRouter = require('./routes/api');
 
 
 class App {
-    constructor(serverIP) {
+    constructor(serverIP, blockchainApi) {
         var app = express();
+        app.blockchainApi = blockchainApi;
         app['serverIP'] = serverIP;
 
         // view engine setup

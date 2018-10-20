@@ -3,4 +3,8 @@ module.exports = {
     TxNew: 'TxNew',
     TxConfirmed: 'TxConfirmed',
     Join: 'join',
+    AddressTxType: {
+        'a': 'Tx',
+        't': 'ERC20'
+    }
 }

@@ -29,7 +29,7 @@ if (!API_URL) {
 
 var blockchainApi = new BlockchainApi(API_URL);
 var serverUrl = `http://${SERVER_IP}:${PORT}`
-var app = new App(serverUrl).getApp()
+var app = new App(serverUrl, blockchainApi).getApp()
 
 app.set('port', PORT);
 
@@ -37,6 +37,7 @@ blockchainApi.get10LatestBlock((err, blocks) => {
   app.blocks = blocks;
   blockchainApi.getPendingTx(10, (err, txs) => {
     app.txs = txs;
+    
     // Create HTTP server.
     var server = http.createServer(app);
 

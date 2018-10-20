@@ -7,6 +7,7 @@ router.get('/', function (req, res, next) {
   if (isNaN(number)) {
     return res.redirect('./error');
   }
+  console.log(req.app.blockchainApi);
   req.app.blockchainApi.getBlockByNumer(number, (err, rs) => {
     if (err || !rs || rs.e) {
       return res.redirect('./error');
