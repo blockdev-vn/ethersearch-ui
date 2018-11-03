@@ -13,6 +13,7 @@ class BlockchainApi {
         this.txUrl = this.rootUrl + '/tx?hash='
         this.latestNumberUrl = this.rootUrl + '/latestnumber'
         this.txPending = this.rootUrl + '/tx/pool?limit='
+        this.contractList = this.rootUrl + '/contract/list?offset=0'
     }
 
     getBlockByNumer(number, cb) {
@@ -160,6 +161,17 @@ class BlockchainApi {
 
             } else {
                 cb(null, rs)
+            }
+        });
+    }
+    getLatestContract(cb) {
+        var url = this.contractList
+        request.get({ url: url, json: true }, (error, response, body) => {
+            var statusCode = response && response.statusCode;
+            if (statusCode == 200) {
+                cb(null, body.data);
+            } else {
+                cb(error || statusCode, null)
             }
         });
     }

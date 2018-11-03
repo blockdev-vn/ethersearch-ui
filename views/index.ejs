@@ -22,15 +22,13 @@
     // listTxs.empty();
     var txRowFlag = 0;
     function handleTx(tx) {
-        // console.log("New tx", tx);
-        // console.log(txRowFlag);
         var liClass = txRowFlag == 0 ? 'secondary':'success';
         txRowFlag = txRowFlag^1;
         var txValue = new BigNumber(tx.value).div(1e18).toString(10);
         var li = `<li class="list-group-item list-group-item-${liClass}">
                         hash 
                         <a href="/tx?hash=${tx.hash}">${Common.shortTextEndingWithDot(tx.hash, 40)}</a> <br>
-                        from <a href="/addr?a=${tx.from}">${Common.shortTextEndingWithDot(tx.from, 20)}</a> to <a href="/addr?a=${tx.to}">${Common.shortTextEndingWithDot(tx.to, 20)}</a>
+                        from <a href="/addr?a=${'0x'+tx.from}">${Common.shortTextEndingWithDot(tx.from, 20)}</a> to <a href="/addr?a=${tx.to}">${Common.shortTextEndingWithDot(tx.to, 20)}</a>
                         <br>
                         value <span>${txValue} ETH</span>
                     </li>`;
@@ -41,7 +39,6 @@
         listTxs.prepend(li)
     }
     function handleBlock(block) {
-        // console.log("New block", block);
         var liClass = block.number%2==0?'secondary':'success'
         var li = `<li class="list-group-item list-group-item-${liClass}">
             <div class="col-12">
@@ -62,7 +59,7 @@
         listBlocks.prepend(li)
     }
     var socket = new Socket('<%=SERVER_IP%>', handleBlock, handleTx, (msg)=>{
-        console.log(msg);
+        // console.log(msg);
     })
     // var socket = new Socket('http://localhost:3001', handleBlock, handleTx)
     socket.start()

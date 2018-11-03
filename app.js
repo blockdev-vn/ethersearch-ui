@@ -13,6 +13,7 @@ var addrRouter = require('./routes/addr');
 var blockRouter = require('./routes/block');
 var searchRouter = require('./routes/search');
 var apiRouter = require('./routes/api');
+var contractRouter = require('./routes/contracts');
 
 
 class App {
@@ -40,6 +41,7 @@ class App {
         app.use('/block', blockRouter);
         app.use('/search', searchRouter);
         app.use('/api', apiRouter);
+        app.use('/contract', contractRouter);
         this.app = app;
     }
     getApp() {

@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+
+            <div class="card-header clearfix">
+
+                <h5>Contract list</h5>
+
+            </div>
+            <div class="card-body padding-0">
+                <div class="table-responsive-sm">
+                    <table class="table table-bordered">
+                        <thead>
+                            <th>address</th>
+                            <th>creator</th>
+                            <th>tx hash</th>
+                            <th>block number</th>
+                            <th>time</th>
+                        </thead>
+                        <tbody>
+                            <%contracts.forEach((tx)=>{%>
+                            <tr>
+                                <td>
+                                    <a href="/addr?a=<%=tx.address%>">
+                                        <%=tx.address%></a>
+                                </td>
+                                <td>
+                                        <a href="/addr?a=<%=tx.creator%>">
+                                            <%=tx.creator%></a>
+                                    </td>
+                                <td>
+                                    <a href="/tx?hash=<%=tx.hash%>">
+                                        <%=Common.shortTextEndingWithDot(tx.hash, 20)%></a>
+                                </td>
+                                <td>
+                                    <a href="/block?number=<%=tx.blockNumber%>">
+                                        <%=tx.blockNumber%></a>
+                                </td>
+                                <td class="time-moment">
+                                    <%=tx.blockTime%>
+                                </td>
+                            </tr>
+                            <%})%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
