@@ -19,8 +19,12 @@
                                     <br>
                                     mined by
                                     <a href="/addr?a=<%=block.miner%>"><%=block.miner%></a><br>
-                                    <span>txs <%=block.transactions.length%> </span>
-                                    <span>uncles <%=block.uncles.length%></span>
+                                   <% /* %>
+                                    <!-- <span>txs <%=block.transactions.length%> </span> -->
+                                    <!-- <span>uncles <%=block.uncles.length%></span> -->
+                                    <%*/%>
+                                    <span>txs <%=block.txNumber%> </span>
+                                    <span>uncles <%=block.uncleNumber%></span>
                                     <!-- <span>3.375 eth</span> -->
                                 </div>
                         </li>

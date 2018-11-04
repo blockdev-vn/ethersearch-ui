@@ -14,6 +14,7 @@ class BlockchainApi {
         this.latestNumberUrl = this.rootUrl + '/latestnumber'
         this.txPending = this.rootUrl + '/tx/pool?limit='
         this.contractList = this.rootUrl + '/contract/list?offset=0'
+        this.contractDetail = this.rootUrl + '/contract/detail?a='
     }
 
     getBlockByNumer(number, cb) {
@@ -44,13 +45,25 @@ class BlockchainApi {
 
     getAddressSummary(addr, cb) {
         var url = this.addressUrl + addr;
+        var self = this;
 
         request.get(url, (error, response, body) => {
             var statusCode = response && response.statusCode;
             // console.log(body);
             if (statusCode == 200) {
                 var result = JSON.parse(body)
-                cb(null, result);
+
+                if (result.data && result.data.code) {
+                    self.getContractDetail(addr, (err, contract)=>{
+                        console.log(contract);
+                        if (contract && contract.length) {
+                            result.data.detail = contract[0];
+                        }
+                        cb(null, result);
+                    })
+                } else {
+                    cb(null, result);
+                }
             } else {
                 cb(error, null)
             }
@@ -166,6 +179,17 @@ class BlockchainApi {
     }
     getLatestContract(cb) {
         var url = this.contractList
+        request.get({ url: url, json: true }, (error, response, body) => {
+            var statusCode = response && response.statusCode;
+            if (statusCode == 200) {
+                cb(null, body.data);
+            } else {
+                cb(error || statusCode, null)
+            }
+        });
+    }
+    getContractDetail(addr, cb) {
+        var url = this.contractDetail + addr
         request.get({ url: url, json: true }, (error, response, body) => {
             var statusCode = response && response.statusCode;
             if (statusCode == 200) {

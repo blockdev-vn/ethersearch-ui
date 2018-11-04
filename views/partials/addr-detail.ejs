@@ -20,7 +20,21 @@
                                             <tr>
                                                 <td>nonce</td>
                                                 <td class="bignumber"><%=nonce%></td>
-                                            </tr>                                            
+                                            </tr>
+                                        <%if(code) {%>
+                                            <tr>
+                                                <td>create at</td>
+                                                <td class="time-moment"><%=detail.blockTime%></td>
+                                            </tr>
+                                            <tr>
+                                                <td>create by</td>
+                                                <td ><a href="/addr?a=<%=detail.creator%>"><%=detail.creator%></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>create in tx</td>
+                                                <td ><a href="/tx?hash=<%=detail.hash%>"><%=detail.hash%></a></td>
+                                            </tr>
+                                        <%}%>       
                                         </tbody>
                                     </table>
                                 </div>
@@ -97,9 +111,10 @@
                                                     <td>
                                                         <%if (tx.type == 0 ) {%>
                                                             <span class="badge badge-warning">out</span>
-                                                        <%} else {%>
+                                                        <%} else if (tx.type == 1 ) {%>
                                                             <span class="badge badge-success">in</span>
-
+                                                        <%} else if (tx.type == 2 ) {%>
+                                                            <span class="badge badge-danger">create</span>
                                                         <%}%>
                                                     </td>
                                                     <td>

@@ -11,6 +11,9 @@ class Socket {
         // this.server.set('transports', ['websocket', 'xhr-polling', 'jsonp-polling', 'htmlfile', 'flashsocket']);
         // this.server.set('origins', '*:*');
     }
+    setApp(app) {
+        this.app = app;
+    }
     start() {
         this.connectToApi();
         this.handleConnectionFromClient();

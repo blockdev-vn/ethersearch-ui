@@ -13,11 +13,11 @@ router.get('/', function (req, res) {
     if (err || !rs || rs.e) {
       res.redirect('./error');
     }
-
     var attachData = {
       title: 'address ' + addr,
       address: addr
     }
+    console.log(rs);
     attachData = Object.assign(attachData, rs.data)
     attachData['Common'] = Common;
     attachData['EthJsUtil'] = EthJsUtil;
